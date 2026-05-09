@@ -1,9 +1,21 @@
-import type { FC } from 'react';
-import { motion } from 'framer-motion';
-import { Terminal as Github, Menu } from 'lucide-react';
+import { useState, type FC } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Terminal as Github, Menu, X } from 'lucide-react';
 import './Header.css';
 
 const Header: FC = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleMenu = () => setIsOpen(!isOpen);
+
+  const navLinks = [
+    { name: 'Home', href: '#home' },
+    { name: 'Arsenal', href: '#skills' },
+    { name: 'Grind', href: '#experience' },
+    { name: 'Chaos', href: '#projects' },
+    { name: 'Vibe', href: '#contact' },
+  ];
+
   return (
     <motion.header 
       className="header"
@@ -22,12 +34,12 @@ const Header: FC = () => {
         </motion.div>
         
         <nav className="nav">
-          <ul className="nav-list">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#skills">Arsenal</a></li>
-            <li><a href="#experience">Grind</a></li>
-            <li><a href="#projects">Chaos</a></li>
-            <li><a href="#contact">Vibe</a></li>
+          <ul className="nav-list desktop-only">
+            {navLinks.map((link) => (
+              <li key={link.name}>
+                <a href={link.href}>{link.name}</a>
+              </li>
+            ))}
             <li>
               <motion.a 
                 href="https://github.com/mustafawk" 
@@ -39,11 +51,37 @@ const Header: FC = () => {
               </motion.a>
             </li>
           </ul>
-          <button className="mobile-menu-btn">
-            <Menu />
+          
+          <button className="mobile-menu-btn" onClick={toggleMenu}>
+            {isOpen ? <X /> : <Menu />}
           </button>
         </nav>
       </div>
+
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div 
+            className="mobile-nav"
+            initial={{ opacity: 0, x: '100%' }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: '100%' }}
+            transition={{ type: 'tween', duration: 0.3 }}
+          >
+            <ul className="mobile-nav-list">
+              {navLinks.map((link) => (
+                <li key={link.name}>
+                  <a href={link.href} onClick={toggleMenu}>{link.name}</a>
+                </li>
+              ))}
+              <li>
+                <a href="https://github.com/mustafawk" target="_blank" onClick={toggleMenu}>
+                  GitHub
+                </a>
+              </li>
+            </ul>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.header>
   );
 };
