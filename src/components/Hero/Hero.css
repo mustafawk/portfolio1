@@ -2,91 +2,161 @@
   min-height: 100vh;
   display: flex;
   align-items: center;
-  padding-top: 120px;
+  position: relative;
+  overflow: hidden;
 }
+
+.hero-background {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+}
+
+.floating-symbols {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.symbol {
+  position: absolute;
+  color: var(--primary-color);
+  opacity: 0.2;
+}
+
+.symbol:nth-child(1) { top: 10%; left: 10%; }
+.symbol:nth-child(2) { top: 20%; right: 15%; }
+.symbol:nth-child(3) { bottom: 15%; left: 20%; }
+.symbol:nth-child(4) { bottom: 30%; right: 10%; }
+.symbol:nth-child(5) { top: 50%; left: 5%; }
 
 .hero-container {
   display: grid;
-  grid-template-columns: 1.2fr 0.8fr;
+  grid-template-columns: 1fr 1fr;
   gap: 4rem;
   align-items: center;
 }
 
-.hero-title {
-  font-size: 3.5rem;
-  margin-bottom: 1rem;
+.goofy-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--card-bg);
+  padding: 0.5rem 1rem;
+  border-radius: 50px;
+  border: 1px solid var(--primary-color);
+  font-size: 0.9rem;
+  margin-bottom: 2rem;
 }
 
-.hero-title .highlight {
-  color: var(--primary-color);
+.hero-title {
+  font-size: 6rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  line-height: 0.9;
+}
+
+.glitch-text {
+  color: var(--secondary-color);
+  text-shadow: 2px 2px var(--primary-color);
 }
 
 .hero-subtitle {
-  font-size: 1.5rem;
-  color: var(--text-muted);
-  margin-bottom: 1.5rem;
+  font-size: 2rem;
+  margin-bottom: 2rem;
   font-weight: 500;
 }
 
+.underline {
+  border-bottom: 4px solid var(--tertiary-color);
+}
+
 .hero-description {
-  font-size: 1.1rem;
-  margin-bottom: 2.5rem;
-  max-width: 600px;
+  font-size: 1.2rem;
+  color: var(--text-muted);
+  max-width: 500px;
+  margin-bottom: 3rem;
 }
 
 .hero-cta {
   display: flex;
-  gap: 1rem;
+  gap: 1.5rem;
+  align-items: center;
 }
 
-.btn-outline {
-  border: 2px solid var(--primary-color);
-  color: var(--primary-color);
-}
-
-.btn-outline:hover {
-  background-color: var(--primary-color);
+.btn-insta {
+  background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
   color: white;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
-.hero-image {
+/* Visual Side */
+.visual-container {
+  position: relative;
+  width: 400px;
+  height: 400px;
   display: flex;
+  align-items: center;
   justify-content: center;
 }
 
-.image-placeholder {
-  width: 300px;
-  height: 300px;
-  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+.center-orb {
+  width: 150px;
+  height: 150px;
+  background: var(--card-bg);
+  border: 2px solid var(--primary-color);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 4rem;
-  font-weight: 800;
-  color: white;
-  box-shadow: 0 20px 40px rgba(37, 99, 235, 0.3);
+  box-shadow: var(--neon-shadow);
+  z-index: 2;
 }
+
+.orb-text {
+  font-size: 3rem;
+  font-weight: 800;
+  color: var(--primary-color);
+}
+
+.orbiting-icons {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.orbit-icon {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  background: var(--card-bg);
+  border: 1px solid white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.orbit-icon:nth-child(1) { top: 0; left: 50%; transform: translateX(-50%); }
+.orbit-icon:nth-child(2) { bottom: 0; left: 50%; transform: translateX(-50%); }
+.orbit-icon:nth-child(3) { top: 50%; right: 0; transform: translateY(-50%); }
 
 @media (max-width: 992px) {
   .hero-container {
     grid-template-columns: 1fr;
     text-align: center;
   }
-  .hero-description {
-    margin-left: auto;
-    margin-right: auto;
+  .hero-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
-  .hero-cta {
-    justify-content: center;
-  }
-  .hero-image {
-    order: -1;
-  }
-}
-
-@media (max-width: 576px) {
   .hero-title {
-    font-size: 2.5rem;
+    font-size: 4rem;
+  }
+  .hero-visual {
+    display: none;
   }
 }

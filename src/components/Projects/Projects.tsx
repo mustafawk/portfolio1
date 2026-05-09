@@ -1,48 +1,77 @@
 import type { FC } from 'react';
+import { motion } from 'framer-motion';
+import { ExternalLink, Terminal, ShieldAlert } from 'lucide-react';
+
+const Github = Terminal;
 import './Projects.css';
 
 const Projects: FC = () => {
   const projects = [
     {
-      title: 'AI Powered Business Card Reader',
+      title: 'Business Card Oracle',
+      subtitle: 'AI/ML Project',
+      icon: <Terminal className="proj-icon" />,
       duration: 'March 2026 - Present',
-      tech: 'Python, FastAPI',
-      highlights: [
-        'Developed a quick API utilizing free tools for efficient data extraction.',
-        'System reads all fields from business cards and returns them as JSON.',
-        'Currently enhancing with a personalized model for better request handling.'
-      ]
+      tech: ['Python', 'FastAPI', 'AI Models'],
+      description: 'An API that basically eats business cards and vomits structured JSON. Magic? No, just good code.',
+      color: 'var(--primary-color)'
     },
     {
-      title: 'AI Fraud Detection System',
+      title: 'The Fraud Buster',
+      subtitle: 'Full Stack + AI',
+      icon: <ShieldAlert className="proj-icon" />,
       duration: 'Nov 2025 - Dec 2025',
-      tech: 'Python, FastAPI, React, PostgreSQL, Hugging Face',
-      highlights: [
-        'Built a full web interface for a bank with transaction capabilities.',
-        'Implemented secure JWT authentication with cookie storage.',
-        'Fine-tuned AI models to identify potential fraudulent transactions.'
-      ]
+      tech: ['React', 'PostgreSQL', 'HuggingFace'],
+      description: 'Built a bank interface so good it makes real banks cry. Also detects fraud with AI because trust issues.',
+      color: 'var(--secondary-color)'
     }
   ];
 
   return (
     <section className="projects" id="projects">
       <div className="container">
-        <h2 className="section-title">Projects</h2>
+        <motion.h2 
+          className="section-title"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+        >
+          Things I Built
+        </motion.h2>
+
         <div className="projects-grid">
           {projects.map((project, index) => (
-            <div key={index} className="project-card">
+            <motion.div 
+              key={index} 
+              className="project-card"
+              initial={{ y: 50, opacity: 0 }}
+              whileInView={{ y: 0, opacity: 1 }}
+              transition={{ delay: index * 0.2 }}
+              whileHover={{ scale: 1.02 }}
+            >
+              <div className="project-accent" style={{ background: project.color }}></div>
               <div className="project-content">
-                <h3>{project.title}</h3>
-                <p className="project-duration">{project.duration}</p>
-                <p className="project-tech"><strong>Tech Stack:</strong> {project.tech}</p>
-                <ul className="project-highlights">
-                  {project.highlights.map((highlight, i) => (
-                    <li key={i}>{highlight}</li>
+                <div className="project-header">
+                  {project.icon}
+                  <div>
+                    <h3>{project.title}</h3>
+                    <p className="subtitle">{project.subtitle}</p>
+                  </div>
+                </div>
+                
+                <p className="description">{project.description}</p>
+                
+                <div className="tech-stack">
+                  {project.tech.map((t, i) => (
+                    <span key={i} className="tech-tag">#{t}</span>
                   ))}
-                </ul>
+                </div>
+
+                <div className="project-links">
+                  <motion.a whileHover={{ x: 5 }} href="#"><Github size={20} /> Repo</motion.a>
+                  <motion.a whileHover={{ x: 5 }} href="#"><ExternalLink size={20} /> Live</motion.a>
+                </div>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>

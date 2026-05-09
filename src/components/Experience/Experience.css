@@ -1,5 +1,5 @@
 .experience-timeline {
-  max-width: 800px;
+  max-width: 900px;
   margin: 0 auto;
   position: relative;
   padding-left: 2rem;
@@ -10,69 +10,89 @@
   position: absolute;
   left: 0;
   top: 0;
-  width: 4px;
+  width: 2px;
   height: 100%;
-  background-color: var(--accent-color);
-  border-radius: 2px;
+  background: linear-gradient(to bottom, var(--primary-color), var(--secondary-color), var(--tertiary-color));
+  border-radius: 10px;
+  opacity: 0.3;
 }
 
 .experience-item {
   position: relative;
-  margin-bottom: 3rem;
+  margin-bottom: 4rem;
 }
 
 .experience-dot {
   position: absolute;
   left: -2.35rem;
   top: 0;
-  width: 16px;
-  height: 16px;
-  background-color: var(--primary-color);
+  width: 20px;
+  height: 20px;
   border-radius: 50%;
   border: 4px solid var(--bg-color);
+  box-shadow: 0 0 15px currentColor;
+  z-index: 2;
 }
 
 .experience-card {
-  background-color: var(--accent-color);
-  padding: 2rem;
-  border-radius: 12px;
-  transition: transform 0.3s;
+  background: var(--card-bg);
+  padding: 2.5rem;
+  border-radius: var(--border-radius);
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
 
-.experience-card:hover {
-  transform: translateX(10px);
-}
-
-.experience-card h3 {
-  font-size: 1.25rem;
-  margin-bottom: 0.25rem;
-}
-
-.company {
-  color: var(--primary-color);
-  font-weight: 600;
+.exp-header h3 {
+  font-size: 1.8rem;
   margin-bottom: 0.5rem;
+  color: var(--text-color);
 }
 
-.duration {
+.exp-meta {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
   font-size: 0.9rem;
   color: var(--text-muted);
-  margin-bottom: 1rem;
 }
 
-.description {
+.exp-meta span {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.exp-desc {
   list-style: none;
 }
 
-.description li {
-  margin-bottom: 0.5rem;
+.exp-desc li {
+  margin-bottom: 0.75rem;
   position: relative;
   padding-left: 1.5rem;
+  font-size: 1.05rem;
+  color: var(--text-muted);
 }
 
-.description li::before {
-  content: '→';
+.exp-desc li::before {
+  content: '⚡';
   position: absolute;
   left: 0;
   color: var(--primary-color);
+}
+
+@media (max-width: 768px) {
+  .experience-timeline {
+    padding-left: 1.5rem;
+  }
+  .experience-dot {
+    left: -1.85rem;
+  }
+  .exp-header h3 {
+    font-size: 1.4rem;
+  }
+  .exp-meta {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
 }

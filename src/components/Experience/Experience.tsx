@@ -1,59 +1,85 @@
 import type { FC } from 'react';
+import { motion } from 'framer-motion';
+import { Briefcase, Calendar } from 'lucide-react';
 import './Experience.css';
 
 const Experience: FC = () => {
   const experiences = [
     {
       role: 'Full Stack Developer (Freelance)',
-      company: 'Remote',
+      company: 'Remote Chaos',
       duration: 'July 2025 - Present',
       description: [
-        'Creating small-scale systems with AI integration.',
-        'Managing team leadership from system design to business logic.',
-        'Satisfying clients with high-quality solutions and after-sales support.'
-      ]
+        'Scaling systems with AI that actually makes sense.',
+        'Led the whole squad from design to deployment.',
+        'Keeping clients happy while meeting insane deadlines.'
+      ],
+      color: 'var(--primary-color)'
     },
     {
       role: 'Elixir Developer',
       company: 'Hawks Tech',
-      duration: 'July 2025 - Nov 2025 | Lahore, PK',
+      duration: 'July 2025 - Nov 2025',
       description: [
-        'Reverse engineered systems to trace and fix inconsistencies.',
-        'Resolved small to medium sized bugs and developed new features.',
-        'Enhanced UI/UX for complex features like file uploading.'
-      ]
+        'Reverse engineered the matrix to find bugs.',
+        'Built functional UI/UX that people actually like using.',
+        'Wrangled Elixir-Erlang for production systems.'
+      ],
+      color: 'var(--secondary-color)'
     },
     {
       role: 'Web Development Intern',
-      company: 'Soft Steer Global Technology',
-      duration: 'Oct 2024 - Jan 2025 | Lahore, PK',
+      company: 'Soft Steer Global',
+      duration: 'Oct 2024 - Jan 2025',
       description: [
-        'Mastered HTML, CSS, and JavaScript under senior mentorship.',
-        'Tested internal tools and provided comprehensive technical reports.',
-        'Conducted research and competitor analysis for strategic projects.'
-      ]
+        'Learned the sacred arts of HTML, CSS, and JS.',
+        'Tested tools and broke things (then fixed them).',
+        'Did the deep research for future projects.'
+      ],
+      color: 'var(--tertiary-color)'
     }
   ];
 
   return (
     <section className="experience" id="experience">
       <div className="container">
-        <h2 className="section-title">Work Experience</h2>
+        <motion.h2 
+          className="section-title"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+        >
+          The Grind
+        </motion.h2>
+
         <div className="experience-timeline">
           {experiences.map((exp, index) => (
-            <div key={index} className="experience-item">
-              <div className="experience-dot"></div>
-              <div className="experience-card">
-                <h3>{exp.role}</h3>
-                <h4 className="company">{exp.company}</h4>
-                <p className="duration">{exp.duration}</p>
-                <ul className="description">
+            <motion.div 
+              key={index} 
+              className="experience-item"
+              initial={{ x: index % 2 === 0 ? -50 : 50, opacity: 0 }}
+              whileInView={{ x: 0, opacity: 1 }}
+              transition={{ delay: index * 0.1 }}
+            >
+              <div className="experience-dot" style={{ backgroundColor: exp.color }}></div>
+              <motion.div 
+                className="experience-card"
+                whileHover={{ scale: 1.02, backgroundColor: 'rgba(255, 255, 255, 0.05)' }}
+                style={{ borderLeft: `4px solid ${exp.color}` }}
+              >
+                <div className="exp-header">
+                  <h3>{exp.role}</h3>
+                  <div className="exp-meta">
+                    <span><Briefcase size={14} /> {exp.company}</span>
+                    <span><Calendar size={14} /> {exp.duration}</span>
+                  </div>
+                </div>
+                <ul className="exp-desc">
                   {exp.description.map((item, i) => (
                     <li key={i}>{item}</li>
                   ))}
                 </ul>
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
           ))}
         </div>
       </div>
